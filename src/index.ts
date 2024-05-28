@@ -31,16 +31,9 @@ const createFamilyMember = async (familyMember: TUser): Promise<TUser | undefine
 // create family members
 const createUsers = async (users: TUser[]) => {
     if (familyData.length === 0) return;
-    // for (const user of familyData) {
-    //     await createFamilyMember(user);
-    // }
-    try {
-        const { resource } = await container.items.create(familyData);
-        return resource;
-    } catch (err) {
-        errorHelper(err);
-        return undefined;
-    }
+    for (const user of familyData) {
+        await createFamilyMember(user);
+    }  
 }
 
 // query family members
@@ -107,10 +100,7 @@ const deleteFamilyMember = async (id: string) => {
 
 
 // createFamilyMember(familyMember);
-
 // await createUsers(familyData);
-
-console.log(await queryAllFamilyMembers());
+// console.log(await queryAllFamilyMembers());
 // console.log(await queryFamilyMembersByCountry('China'));
-
-deleteFamilyMember('Müller.4')
+// deleteFamilyMember('Müller.4')
