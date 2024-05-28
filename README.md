@@ -2,9 +2,20 @@
 
 ### Prerequisites
 
+#### Pnpm
+
 ```bash
-pnpm init
-pnpm install @azure/cosmos
-pnpm add -D typescript tsx
-pnpm tsc --init
+pnpm i
+```
+
+#### NPM
+
+```bash
+npm install
+```
+
+#### YARN
+
+```bash
+yarn
 ```
