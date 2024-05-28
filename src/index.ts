@@ -18,10 +18,9 @@ const errorHelper = (err: any) => {
 }
 
 // create family member 
-const createFamilyMember = async (familyMember: TUser): Promise<TUser | undefined> => {
+const createFamilyMember = async (familyMember: TUser) => {
     try {
-        const { resource } = await container.items.create(familyMember);
-        return resource;
+        await container.items.create(familyMember);
     } catch (err) {
         errorHelper(err);
         return undefined;
@@ -33,9 +32,8 @@ const createUsers = async (users: TUser[]) => {
     if (familyData.length === 0) return;
     for (const user of familyData) {
         await createFamilyMember(user);
-    }  
+    }
 }
-
 // query family members
 const queryAllFamilyMembers = async (): Promise<TUser[] | null> => {
     try {
@@ -50,7 +48,6 @@ const queryAllFamilyMembers = async (): Promise<TUser[] | null> => {
         return null;
     }
 }
-
 // query family members via id
 const queryFamilyMembersViaID = async (id: string): Promise<TUser[] | null> => {
     try {
@@ -66,9 +63,7 @@ const queryFamilyMembersViaID = async (id: string): Promise<TUser[] | null> => {
         return null;
     }
 }
-
 // search members via country with query parameters
-
 const queryFamilyMembersByCountry = async (country: string): Promise<TUser[] | null> => {
     try {
         const { resources } = await container.items
@@ -82,25 +77,18 @@ const queryFamilyMembersByCountry = async (country: string): Promise<TUser[] | n
         return null;
     }
 }
-
+// delete family member
 const deleteFamilyMember = async (id: string) => {
     try {
-        const itemExists = await queryFamilyMembersViaID(id);
-        if (itemExists === null || itemExists.length === 0) {
-            console.log("Item does not exist")
-            return ("Item does not exist")
-        } else {
-            await container.item(id).delete();
-        }
-        return id;
+        await container.item(id).delete();        
     } catch (err) {
         errorHelper(err);
     }
 }
 
 
-// createFamilyMember(familyMember);
+await createFamilyMember(familyMember);
+console.log(await queryAllFamilyMembers());
 // await createUsers(familyData);
-// console.log(await queryAllFamilyMembers());
 // console.log(await queryFamilyMembersByCountry('China'));
-// deleteFamilyMember('Müller.4')
+// deleteFamilyMember('Chen.5')

@@ -22,8 +22,5 @@ const containerDefinition = {
 }
 const { container } = await database.containers.createIfNotExists(containerDefinition);
 
-// console.log(database.id, container.id)
-
-
 export default container;
 

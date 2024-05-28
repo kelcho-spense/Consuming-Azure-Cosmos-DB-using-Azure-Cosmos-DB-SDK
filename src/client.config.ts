@@ -1,8 +1,7 @@
+import "dotenv/config";
 import { CosmosClient } from "@azure/cosmos";
 import * as https from 'https';
-import "dotenv/config";
 import assert from "assert";
-import { setLogLevel } from "@azure/logger";
 
 assert(process.env.COSMOS_ENDPOINT, "COSMOS_ENDPOINT is not defined");
 assert(process.env.COSMOS_KEY, "COSMOS_KEY is not defined");
